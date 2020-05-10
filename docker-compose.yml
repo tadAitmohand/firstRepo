@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+#  mysql-container:
+#    image: mysql_mysql
+#    container_name: offre-service-mysql-container
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=root
+#    ports:
+#      - "1306:1036"
+#    volumes:
+#      - /opt/mysql_data :/var/lib/mysql
+    mysql-container:
+      container_name: ticket-service-mysql-container
+  offre-service-container:
+    image: offre-service:latest
+    container_name: offre-service
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      -  ticket-service-mysql-container
